@@ -13,11 +13,11 @@
 
 
 .EXAMPLE
-    .\AlphanumericComboGenerator.ps1
+    .\HyperVCheckpoints.ps1
 
 
 .EXAMPLE
-    .\AlphanumericComboGenerator.ps1 -ExemptVMNames TestVM1, TestVM2, TestVM3
+    .\HyperVCheckpoints.ps1 -ExemptVMNames TestVM1, TestVM2, TestVM3
 
     TestVM1, TestVM2, and TestVM3 will not be powered off and checkpoints will not be created.
 
