@@ -24,9 +24,9 @@
 
 .NOTES
     Author: Justen Mehl, 
-            Booz Allen Hamilton
-            Mehl_justen@bah.com
-
+            mehlsec.com
+            @mehlsec
+            
     Created on: 13 December 2016
     Last Updated: 13 December 2016
     
