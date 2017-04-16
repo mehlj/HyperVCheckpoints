@@ -43,14 +43,13 @@ $VMTotal = Get-VM
 $isExempt = $false
 
 
-# loop through all VMs
 foreach ($VM in $VMTotal)
 {
    
     $CheckpointName = $VM.Name + "_" + $date
     $VMName = $VM.VMName
 
-    # loop through input array and see whether this VM is exempted or not
+    # check for exemptions
     foreach ($name in $ExemptVMNames)
     {
         if($VMName -eq $name)
@@ -80,28 +79,27 @@ foreach ($VM in $VMTotal)
         }
 
     
-        # delete checkpoints older than 60 days
         Write-Host "Deleting all $VMName checkpoints older than 60 days..." 
         $OldCheckpoints = Get-VMSnapshot -VMName $VMName | Where-Object {$_.CreationTime -lt (Get-Date).AddDays(-60)}
         $OldCheckpoints | Remove-VMSnapshot -VMName $VMName
 
-        # create new checkpoint
+
         Write-Host "Creating checkpoint for $VMName..." 
         Checkpoint-VM -Name $VMName -SnapshotName $CheckpointName
 
-        # powering on VM
+
         Write-Host "Powering on $VMName...`n"
         Start-VM -Name $VMName 
 
-        # reset value of isExempt
+
         $isExempt = $false
     }
 
     else
     {
         Write-Host "$VMName has been exempted, moving onto the next VM...`n" -ForegroundColor Cyan
-        
-        # reset value of isExempt
+
+
         $isExempt = $false
     }
     
